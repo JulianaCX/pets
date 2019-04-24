@@ -1,0 +1,3 @@
+Extension: Juliana
+Login/Register Page: Olivia
+Server: Della
