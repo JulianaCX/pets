@@ -1,0 +1,32 @@
+<html>
+
+<head>
+
+</head>
+<body> 
+    Register Me 
+    <form id = 'submission' method= 'POST' action= '/register' onsubmit = 'event.preventDefault();checkPassword()'>
+        Email:<input name ='email'/> 
+        Password: <input name ='password' id = 'password'/>
+        Confirm Password: <input name='verify' id = 'verify' >
+        <input type='submit'/>
+</form>
+  
+<script type='text/javascript'>
+    function checkPassword(){
+        let password = document.getElementById('password').value
+        let verify = document.getElementById('verify').value
+
+        if ( password !== verify) {
+            alert('Passwords do not match')
+            return false;
+        }
+        let form = document.getElementById('submission')
+        form.submit();
+
+        return true 
+    }
+
+</script>
+</body>
+</html>
