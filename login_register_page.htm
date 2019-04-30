@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="bootstrap.css">
+        <style type="text/css">
+            body{
+                background-color: #ffdd8e;
+                }
+
+            .box{
+                float: left;
+                margin-left: 30%;
+                margin-top: 10%
+            }
+            #box2{
+                float: left;
+                margin-top: 10%;
+                margin-left: 5%
+            }
+        </style>
+        <script type="text/javascript">
+
+
+        //CHECK TO MAKE SURE IT MATCHES
+        function checkPassword(){
+            let password1 = document.getElementById("p1").value
+            let password2 = document.getElementById("p2").value
+            console.log(password1, password2)
+            
+            if (password1!=password2){
+                alert("Registration failed. Passwords do not match.")
+                return false
+            }
+
+            if (password1==password2){
+                document.getElementById("form").submit() 
+            return true
+            }
+        }
+        
+        
+        </script>
+    </head>
+    <body>
+    <div class="box">
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Create Account</div>
+            <div class="card-body">
+                <form action="/register" id="form">
+                    Enter Email Address:
+                    <br>
+                    <input type="email" name="email1">
+                    <br> <br>
+                    Enter Password:
+                    <br>
+                    <input type="password" name="pword" id="p1">
+                    <br><br>
+                    Confirm Password:
+                    <br>
+                    <input type="password" name="confirmedPword" id="p2"> 
+                    <br><br>
+                    <button type="button" class="btn btn-warning" id="button" onclick="event.preventDefault();checkPassword()" value = "Submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="box2">
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Log In</div>
+                <div class="card-body">
+                        <form action="/authenticate">
+                            Enter Email Address:
+                            <br>
+                            <input type="email" name="email2">
+                            <br> <br>
+                            Enter Password:
+                            <br>
+                            <input type="password" name="loginPword">
+                            <br><br>
+                            <button type="button" class="btn btn-warning" value = "Submit">Submit</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
