@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <style>
+            body{
+                background-color: lightgoldenrodyellow
+            }
+            #header{
+                font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+                text-align: center;
+                font-weight: bold;
+                color: #ff8721;
+                font-size: 50pt;
+                padding-top: 3%;
+            }    
+
+            #nav{
+                padding-top: 2%;
+                width: 100%;
+                display: flex;
+                grid-template-areas: 
+                    "1 2 3"
+            }
+
+            .navword{
+                font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+                font-weight: bold;
+                margin-left: 22%;
+                margin-bottom: 2%;
+                color: orange
+            }
+
+            .navword:hover{
+                cursor: pointer;
+                font-weight: bold;
+                color: orangered;
+                text-decoration: underline 
+            }
+        
+        
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(document).on("click","#home",function(){
+                    $(".home_content").show();
+                    $(".todo_content").hide();
+                    $(".mypet_content").hide();
+                    
+                });
+        })
+            
+
+                    
+           
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            Home Page
+        </div>
+        <div id="nav">
+            <div class="navword" id="home">HOME</div>
+            <div class="navword" id="todo">TO DO</div>
+            <div class="navword" id="mypet">MY PET</div>
+        </div>
+
+
+        <div id="animalbox_home" class="home_content">
+            <div>
+                animal goes here
+            </div>
+        </div>
+        <div class="todo_content">
+            hide
+        </div>
+        <div class="mypet_content">
+            hide
+        </div>
+    </body>
+</html>
