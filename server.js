@@ -1,58 +1,65 @@
 const express = require('express')
-const bodyParser = require ('body-parser')
-const path = require('path')
-const Database = require('better-sqlite3')
+const app = express()
+const bodyParser = require('body-parser')
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const sqlite3 = require('sqlite3').verbose()
+const crypto = require('crypto')
+app.use(express.static(__dirname));
 
-const db = new Database('./accounts.db')
-db.exec (' CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, username varchar(255), password varchar(255), salt varchar(255))')
-
-const app = express () 
-app.use(bodyParser.urlencoded({
-    extended: true 
-}))
-
-app.post('/register', function(req, res){
-    let username = req.body.email;
-    let password = req.body.password; 
-
-    let stmt = db.prepare ('SELECT * from users WHERE username=?')
-    let row = stmt.get(username)
-    
-  
-    if ( row == undefined){ 
-       let insert = db.prepare('INSERT INTO users (username, password, salt) VALUES (?, ?, ?)')
-       insert.run(username, password, 'SALT')
-       res.redirect('/authenticate')
-    }
-    else { 
-       let filePath = path.join(__dirname,'registerform.html')
-       res.sendFile(filePath) 
-    }
+app.listen(8080, function(){
+    console.log('it works')
 })
-
-app.get('/register', function(req, res){
-    let filePath = path.join(__dirname,'registerform.html')
-    res.sendFile(filePath)
-})
-
-app.get('/authenticate', function(req, res){
-    let filePath = path.join(__dirname,'login.html')
-    res.sendFile(filePath)
-})
-
-app.listen(8081, function() {
-    console.log ('server Listening on port 8081')
+app.get('/', urlencodedParser, function (req, res) {
+    res.sendFile(__dirname + '/index.htm');
 })
 
 
-app.post('/authenticate', function(req, res){ 
+app.post('/register', urlencodedParser, function (req, res) {
+    console.log('register request')
+   email = req.body.email1
+   password = req.body.pword
+   let db = new sqlite3.Database('accounts.db');
 
-    let stmtpass = db.prepare ('SELECT * from users WHERE username=?')
-    let username = req.body.email;
-    let password = req.body.password;
-    let user = stmtpass.get (username)
+   var saltss = crypto.randomBytes(8).toString('hex').slice(0,16)
 
-    if (user.password == password){
-        res.send ('Authenticated!')
-    }
+   password = hashsalt(password, saltss)
+
+   db.run(`INSERT INTO accounts (password,username,salt) VALUES (?, ?, ?)`, [password, email, saltss])
+
+   response = {
+      email:req.body.email1,
+      password:req.body.pword,
+      salts:saltss
+   }
+   console.log(response)
+  res.sendFile(__dirname + '/index.htm');
+
 })
+app.post('/authenticate', urlencodedParser, function (req, res) {
+   email = req.body.email
+   password = req.body.password
+   let db = new sqlite3.Database('accounts.db');
+
+   db.all(`SELECT salt, password FROM accounts WHERE ?="username"`, [email], (err, rows) => {
+      rows.forEach((row)=>{
+         if(hashsalt(password, row.salt)== row.password){
+            console.log('authenticated')
+            res.end('Authenticated!')}
+         else{
+            res.end('Failed!')
+            console.log('faileesds')
+         }
+      })
+      
+   })
+})
+
+
+function hashsalt(password, salts){
+    var hash = crypto.createHmac('sha512', salts)
+    hash.update(password);
+    return hash.digest('hex')
+}
+
+
+
