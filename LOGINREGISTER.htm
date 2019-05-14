@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="bootstrap.css">
+        <style type="text/css">
+            body{
+                margin-top: 5%;
+                grid-template-areas: "a b b b e"
+                'f g h i j'
+                'k l m n o';
+                background-color: #fff58f;
+                background-image: linear-gradient(to bottom right, white, #fff58f);
+                display: grid;
+            }
+           
+        </style>
+        <script type="text/javascript">
+        //CHECK TO MAKE SURE IT MATCHES
+        function checkPassword(){
+            let password1 = document.getElementById("p1").value
+            let password2 = document.getElementById("p2").value
+            console.log(password1, password2)
+            
+            if (password1!=password2){
+                alert("Registration failed. Passwords do not match.")
+                return false
+            }
+            if (password1==password2){
+                document.getElementById("form").submit() 
+            return true
+            }
+        }
+        
+        
+        </script>
+    </head>
+    <body>
+        
+        <div class="card text-white bg-primary mb-3" style="grid-area: g; 
+       
+        ">
+            <div class="card-header" >
+                <h3>Create Account</h3></div>
+            <div class="card-body" >
+                <form action="/register" method='post' id="form">
+                    Enter Email Address:
+                    <br>
+                    <input type="text" class="form-control" name="email1">
+                    <br> <br>
+                    Enter Password:
+                    <br>
+                    <input type="password" class="form-control" name="pword" id="p1">
+                    <br><br>
+                    Confirm Password:
+                    <br>
+                    <input type="password" class="form-control"  name="confirmedPword" id="p2"> 
+                    <br><br>
+                    <button class="btn btn-danger disabled" id="button" style='width:100%;' onclick="checkPassword()">Submit</button>
+
+                </form>
+            </div>
+        </div>
+            <div class="card text-white bg-primary mb-3" style="grid-area: i;">
+                <div class="card-header" ><h3>Log In</h3></div>
+                <div class="card-body" >
+                        <form action="/homepage" method='post' style='margin:auto;'>
+                            <br><br>
+                            Enter Email Address:
+                            <br>
+                            <input type="text" class="form-control" name="email2">
+                            <br> <br><br>
+                            Enter Password:
+                            <br>
+                            <input type="password" class="form-control" name="loginPword">
+                            <br><br><br>
+                            <input type="submit" class="btn btn-danger disabled"  name='submit' style='width:100%;'>
+                        </form>
+                </div>
+            </div>
+    </body>
+    <script type="text/javascript">
+        //not finished
+        $.get( "/test", function( data ) {
+        }, "json" );
+    function getstuff(stufftoget){
+        $.get( "/getTasks",{data : stufftoget}, function( data ) {
+          $( "body" )
+            .append( "Name: " + data.name ) // John
+            .append( "Time: " + data.time ); //  2pm
+        }, "json" );
+}
+    </script>
+</html>
