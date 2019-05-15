@@ -4,6 +4,10 @@ const bodyParser = require('body-parser')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const sqlite3 = require('sqlite3').verbose()
 const crypto = require('crypto')
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+app.use(cookieParser());
+app.use(session({secret: "Shh, keep it a secret!"}));
 app.use(express.static(__dirname));
 
 app.listen(8080, function(){
@@ -35,16 +39,18 @@ app.post('/register', urlencodedParser, function (req, res) {
   res.sendFile(__dirname + '/index.htm');
 
 })
-app.post('/authenticate', urlencodedParser, function (req, res) {
-   email = req.body.email
-   password = req.body.password
+app.post('/homepage', urlencodedParser, function (req, res) {
+   console.log('eag')
+   email = req.body.email2
+   password = req.body.loginPword
    let db = new sqlite3.Database('accounts.db');
 
-   db.all(`SELECT salt, password FROM accounts WHERE ?="username"`, [email], (err, rows) => {
+   db.all(`SELECT id, salt, password FROM accounts WHERE ?="username"`, [email], (err, rows) => {
       rows.forEach((row)=>{
          if(hashsalt(password, row.salt)== row.password){
             console.log('authenticated')
-            res.end('Authenticated!')}
+            req.session.userId = row.id
+            res.sendFile(__dirname + '/home.html')}
          else{
             res.end('Failed!')
             console.log('faileesds')
@@ -53,8 +59,16 @@ app.post('/authenticate', urlencodedParser, function (req, res) {
       
    })
 })
+app.get('/test', urlencodedParser, function (req, res) {
+  console.log(req.session.userId)
+})
 
 
+function hashsalt(password, salts){
+    var hash = crypto.createHmac('sha512', salts)
+    hash.update(password);
+    return hash.digest('hex')
+}
 function hashsalt(password, salts){
     var hash = crypto.createHmac('sha512', salts)
     hash.update(password);
