@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="bootstrap.css">
+        <style type="text/css">
+            body{
+                font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif !important;
+                grid-template-areas: "a b b b e"
+                'f g h i j'
+                'k l m n o';
+                grid-template-rows: 25% 60% 15%;
+                grid-template-columns:15% 27% 16% 27% 15%;
+background-color: #85FFBD;
+background-image: linear-gradient(140deg, #7cdbd5 20%,#F9BE02);
+
+  display: grid;
+
+}
+h1 {
+  color: white !important;
+  text-shadow: 2px 2px 4px #000000 !important; 
+
+}
+        </style>
+        <script type="text/javascript">
+
+
+        //CHECK TO MAKE SURE IT MATCHES
+        function checkPassword(){
+            let password1 = document.getElementById("p1").value
+            let password2 = document.getElementById("p2").value
+            console.log(password1, password2)
+            
+            if (password1!=password2){
+                alert("Registration failed. Passwords do not match.")
+                return false
+            }
+
+            if (password1==password2){
+                document.getElementById("form").submit() 
+            return true
+            }
+        }
+        
+        
+        </script>
+    </head>
+    <body>
+        <h1 style='grid-area:b;text-align: center;padding-top:7rem'>Organizer</h1>
+
+        <div class="card text-white bg-primary mb-3 align-middle" style="grid-area: g; padding:3%;border-radius:10%;color:black !important;border-color:black;background-color:white!important; box-shadow: 5px 2px 2px black;text-align: center;
+       
+        ">
+            <div class="card-header" style='background-color: white;width:90%;margin:auto;border-radius:100%;border-color:lightgrey;'>
+                <h3>Create Account</h3></div>
+            <div class="card-body" style='background-color: white;display:block;min-height:30%;border-radius:30%;margin:auto'>
+                <form action="/register" method='post' id="form">
+                    Enter Email Address:
+                    <br>
+                    <input type="text" class="form-control" name="email1">
+                    <br> <br>
+                    Enter Password:
+                    <br>
+                    <input type="password" class="form-control" name="pword" id="p1">
+                    <br><br>
+                    Confirm Password:
+                    <br>
+                    <input type="password" class="form-control"  name="confirmedPword" id="p2"> 
+                    <br><br>
+                    <button class="btn btn-success disabled" id="button" style='width:100%;' onclick="checkPassword()">Submit</button>
+
+                </form>
+            </div>
+        </div>
+            <div class="card text-white bg-primary mb-3" style="padding:3%;grid-area: i;float:left;border-radius:10%;
+
+            color:black !important;border-color:black;background-color:white !important;box-shadow: 5px 2px 2px black;">
+                <div class="card-header" style='background-color: white;margin:auto;border-radius:100%;border-color:lightgrey;'><h3>Log In</h3></div>
+                <div class="card-body" style='min-height:30%; background-color: white;border-radius:30%;margin:auto'>
+                        <form action="/homepage" method='post' style='margin:auto;'>
+                            <br><br>
+                            Enter Email Address:
+                            <br>
+                            <input type="text" class="form-control" name="email2">
+                            <br> <br><br>
+                            Enter Password:
+                            <br>
+                            <input type="password" class="form-control" name="loginPword">
+                            <br><br><br>
+                            <input type="submit" class="btn btn-success disabled"  name='submit' style='width:100%;'>
+                        </form>
+                </div>
+            </div>
+    </body>
+    <script type="text/javascript">
+        //not finished
+        $.get( "/test", function( data ) {
+
+        }, "json" );
+    function getstuff(stufftoget){
+        $.get( "/getTasks",{data : stufftoget}, function( data ) {
+          $( "body" )
+            .append( "Name: " + data.name ) // John
+            .append( "Time: " + data.time ); //  2pm
+        }, "json" );
+}
+    </script>
+</html>
