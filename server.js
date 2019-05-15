@@ -39,7 +39,7 @@ app.post('/register', urlencodedParser, function (req, res) {
   res.sendFile(__dirname + '/index.htm');
 
 })
-app.post('/homepage', urlencodedParser, function (req, res) {
+app.get('/homepage', urlencodedParser, function (req, res) {
    console.log('eag')
    email = req.body.email2
    password = req.body.loginPword
@@ -52,12 +52,15 @@ app.post('/homepage', urlencodedParser, function (req, res) {
             req.session.userId = row.id
             res.sendFile(__dirname + '/home.html')}
          else{
+            console.log('Fail')
             res.end('Failed!')
             console.log('faileesds')
          }
       })
       
    })
+   console.log('Failed ')
+   res.end('Failed')
 })
 app.get('/test', urlencodedParser, function (req, res) {
   console.log(req.session.userId)
