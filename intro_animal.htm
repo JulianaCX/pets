@@ -1,0 +1,144 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="bootstrap.css">
+        <style type="text/css">
+
+        body{
+            background-color: aliceblue;
+            display: grid;
+            grid-template-areas: 
+                "header header header header"
+                "sub sub sub sub"
+                "a1 a2 a3 a4"
+                "b b b b"
+                "a5 a6 a7 a8"
+                ;
+            
+            margin-left: 6%;
+            margin-right: 6%
+        }
+
+
+        #header{
+                font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+                text-align: center;
+                font-weight: bold;
+                color: #ff8721;
+                font-size: 50pt;
+                padding-top: 2%;
+                grid-area: header;
+            }
+
+        #subtitle{
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+            text-align: center;
+            font-weight: bold;
+            color: orangered;
+            font-size: 18pt;
+            grid-area: sub;
+        }
+        
+        .animalbox{
+            width: 60% !important; 
+            height: 80% !important;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 20%;
+            border-color: orangered;
+                margin-left: 10%;
+                margin-top: 10%;
+                padding: 10%;  
+            display: flex;
+            
+        }
+        
+        
+
+
+        .animalbox:hover{
+            background-color: lightskyblue;
+            cursor: pointer;
+            border-bottom-width: 4px;
+            border-top: 1px
+
+        }
+        
+        #a1{
+            grid-area: a1;
+        }
+        
+        #a2{
+            grid-area: a2
+        }
+
+        #a3{
+            grid-area: a3;
+        }
+
+        #a4{
+            grid-area: a4;
+
+        }
+        
+        #a5{
+            grid-area: a5
+        }
+
+        #a6{
+            grid-area: a6;
+
+        }
+        
+        #a7{
+            grid-area: a7
+        }
+
+        #a8{
+            grid-area: a8
+        }
+        #b{
+            height: 100%;
+            grid-area: b;
+            padding: 1%
+        }
+        img{
+            height: 110%;
+            width: 110%;
+        }
+
+        </style>
+
+
+
+    </head>
+    <body>
+        <div id="header">Welcome!</div>
+        <div id="subtitle">Choose your animal:</div>
+        <div id="a1" class="animalbox">
+            <div style="grid-area: 1"></div>
+            <img src="elephant.svg" alt="">
+        </div>
+        <div id="a2" class="animalbox">
+            <img src="dog.svg" alt="">
+        </div>
+        <div id="a3" class="animalbox">
+            <img src="cat.svg" alt="">
+        </div>
+        
+        <div id="a4" class="animalbox">
+            <img src="hippo.svg" alt="">
+        </div>
+        <div id="a5" class="animalbox">
+            <img src="frog.svg" alt="">
+        </div>
+        <div id="a6" class="animalbox">
+            <img src="fish.svg" alt="">
+        </div>
+        <div id="a7" class="animalbox">
+                <img src="dog2.svg" alt="">
+        </div>
+        <div id="a8" class="animalbox">
+            <img src="duck.svg" alt="">
+        </div>
+    </body>
+</html>
