@@ -2,7 +2,6 @@
     <head>
         <link rel="stylesheet" href="bootstrap.css">
         <style type="text/css">
-
         body{
             background-color: aliceblue;
             display: grid;
@@ -17,8 +16,6 @@
             margin-left: 6%;
             margin-right: 6%
         }
-
-
         #header{
                 font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
                 text-align: center;
@@ -28,7 +25,6 @@
                 padding-top: 2%;
                 grid-area: header;
             }
-
         #subtitle{
             font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
             text-align: center;
@@ -53,14 +49,11 @@
         }
         
         
-
-
         .animalbox:hover{
             background-color: lightskyblue;
             cursor: pointer;
             border-bottom-width: 4px;
             border-top: 1px
-
         }
         
         #a1{
@@ -70,29 +63,23 @@
         #a2{
             grid-area: a2
         }
-
         #a3{
             grid-area: a3;
         }
-
         #a4{
             grid-area: a4;
-
         }
         
         #a5{
             grid-area: a5
         }
-
         #a6{
             grid-area: a6;
-
         }
         
         #a7{
             grid-area: a7
         }
-
         #a8{
             grid-area: a8
         }
@@ -105,7 +92,6 @@
             height: 110%;
             width: 110%;
         }
-
         </style>
 
 
@@ -114,31 +100,55 @@
     <body>
         <div id="header">Welcome!</div>
         <div id="subtitle">Choose your animal:</div>
-        <div id="a1" class="animalbox">
+        <div id="a1" class="animalbox" onclick='sub("elephant.svg")'>
             <div style="grid-area: 1"></div>
             <img src="elephant.svg" alt="">
         </div>
-        <div id="a2" class="animalbox">
+        <div id="a2" class="animalbox" onclick='sub("elephant.svg")' >
             <img src="dog.svg" alt="">
         </div>
-        <div id="a3" class="animalbox">
+        <div id="a3" class="animalbox" onclick='sub("cat.svg")'>
             <img src="cat.svg" alt="">
         </div>
         
-        <div id="a4" class="animalbox">
+        <div id="a4" class="animalbox" onclick='sub("hippo.svg")'>
             <img src="hippo.svg" alt="">
         </div>
-        <div id="a5" class="animalbox">
+        <div id="a5" class="animalbox" onclick='sub("frog.svg")'>
             <img src="frog.svg" alt="">
         </div>
-        <div id="a6" class="animalbox">
+        <div id="a6" class="animalbox" onclick='sub("fish.svg")'>
             <img src="fish.svg" alt="">
         </div>
-        <div id="a7" class="animalbox">
+        <div id="a7" class="animalbox" onclick='sub("dog2.svg")'>
                 <img src="dog2.svg" alt="">
         </div>
-        <div id="a8" class="animalbox">
+        <div id="a8" class="animalbox" onclick='sub("duck.svg")'>
             <img src="duck.svg" alt="">
         </div>
     </body>
 </html>
+
+
+<script type="text/javascript">
+    function sub(image){
+        document.cookie = "image="+image
+        $.get('/home',function() {
+
+        })
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

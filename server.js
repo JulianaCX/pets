@@ -44,6 +44,7 @@ app.post('/register', urlencodedParser, function (req, res) {
       db.all(`SELECT id, salt, password FROM accounts WHERE ?="username"`, [email], (err, rows) => {
         rows.forEach((row)=>{
           res.cookie("TheID", row.id)
+          res.cookie("TheUser", row.username)
         })
 
         response = {
@@ -83,11 +84,12 @@ app.post('/homepage', urlencodedParser, function (req, res) {
 
    console.log(passwrd)
 
-   db.all(`SELECT id, salt, password FROM accounts WHERE ?="username"`, [email], (err, rows) => {
+   db.all(`SELECT id,username, salt, password FROM accounts WHERE ?="username"`, [email], (err, rows) => {
       rows.forEach((row)=>{
          if(hashsalt(passwrd, row.salt)== row.password){
             console.log('authenticated')
             res.cookie("TheID" , row.id)
+            res.cookie("TheUser", row.username)
             helper = '/home'
           }
       })
@@ -100,8 +102,12 @@ app.post('/homepage', urlencodedParser, function (req, res) {
 
 
 app.all('/addgoals', urlencodedParser, function (req, res) {
-  
-
+   name = req.body.goaltitle
+   priority = req.body.priority
+   date = req.body.date
+   type = req.body.goaltype
+   db.run(`INSERT INTO goals (id,goals, subgoals, priority, duedate, complete) VALUES (?, ?, ?)`, [req.cookie, name, type, priority, date, 'no'])
+   res.cookie('goal', [name, priority, date, type])
 })
 
 
